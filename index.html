@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head profile="http://www.w3.org/2005/10/profile">
 
@@ -48,40 +47,59 @@
         <div class="col-lg-12 tile-group clearfix">
             <div class="tile quadro ol-transparent triple-vertical">
                 <div class="tile-content">
-                  <div class="brand">
-                      <span class="label fg-black" data-bind="visible: loading">cargando...</span>
-                      <span class="badge bg-orange"><i class="icon-share-2 fg-white"></i></span>
+                  <div class="brand bg-black">
+                      <span class="label fg-white">¿Cómo jugar? Haga click <a href="http://es.wikipedia.org/wiki/Tres_en_l%C3%ADnea" target="_blank">aquí</a> para saber más.</span>
+                      <span class="badge bg-orange"><i class="icon-help fg-white"></i></span>
                   </div>
                   <div class="panel">
                     <div class="panel-header bg-orange fg-white">
                     </div>
-                    <div class="panel-content fg-black">
-                        <span>TU turno!!</span>
+                    <div class="panel-content fg-black text-center" data-bind="visible: winner">
+                        <h1>¡¡GANADOR!!</h1>
+                        <h1>
+                          <i class="icon-medal-2 on-left"></i>
+                          <span class="label fg-black" data-bind="text: winner"></span>
+                        </h1>
+                        <a class="clear" href="javascript:;"><i class="icon-loop on-left"></i>Jugar otra vez</a>
+                    </div>
+                    <div class="panel-content fg-black text-center" data-bind="visible: loading">
+                        <h1>Espera un momento.</h1>
+                        <p>Estoy pensando...</p>
+                        <i class="icon-cancel-2 fg-blue header"></i>
+                    </div>
+                    <div class="panel-content fg-black text-center" data-bind="visible: draw">
+                        <h1>¡¡EMPATE!!</h1>
+                        <a class="clear" href="javascript:;"><i class="icon-loop on-left"></i>Jugar otra vez</a>
+                    </div>
+                    <div class="panel-content fg-black text-center" data-bind="visible: loading() == false && winner() == false && draw() == false">
+                        <h1>Es tu turno.</h1>
+                        <p>Elige un casillero.</p>
+                        <i class="icon-radio-unchecked fg-green header"></i>
                     </div>
                   </div>
-                </div>
-            </div>
+                </div> <!-- /tile-content -->
+            </div> <!-- /triple-vertical -->
 
             <!-- ko foreach:  { data: board, as: 'row' } -->
               <!-- ko foreach:  { data: row, as: 'col' } -->
-                <div class="tile ol-transparent">
+                <div class="tile ol-transparent" data-click="transform">
                     <a class="board-tile" href="javascript:;" data-bind="
                       attr: { 
                         rel: $parentContext.$index() + '|' + $index()  
                       },
                       css:{
-                        clickeable: $data == undefined
+                        clickeable: selected() == undefined
                       }">
                       <div class="tile-content icon">
-                          <span data-bind="css: $data"></span>
+                          <span data-bind="css: selected()"></span>
                       </div>
                     </a>
                 </div>  
               <!-- /ko -->
             <!-- /ko -->
 
-        </div>
-      </div>
+        </div> <!-- /tile-group -->
+      </div> <!-- /container -->
 
       <footer>
           <div class="bottom-menu-wrapper">
