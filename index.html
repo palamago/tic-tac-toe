@@ -44,6 +44,45 @@
             </div>
       </header>
 
+      <div id="main-content" class="row ">
+        <div class="col-lg-12 tile-group clearfix">
+            <div class="tile quadro ol-transparent triple-vertical">
+                <div class="tile-content">
+                  <div class="brand">
+                      <span class="label fg-black" data-bind="visible: loading">cargando...</span>
+                      <span class="badge bg-orange"><i class="icon-share-2 fg-white"></i></span>
+                  </div>
+                  <div class="panel">
+                    <div class="panel-header bg-orange fg-white">
+                    </div>
+                    <div class="panel-content fg-black">
+                        <span>TU turno!!</span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <!-- ko foreach:  { data: board, as: 'row' } -->
+              <!-- ko foreach:  { data: row, as: 'col' } -->
+                <div class="tile ol-transparent">
+                    <a class="board-tile" href="javascript:;" data-bind="
+                      attr: { 
+                        rel: $parentContext.$index() + '|' + $index()  
+                      },
+                      css:{
+                        clickeable: $data == undefined
+                      }">
+                      <div class="tile-content icon">
+                          <span data-bind="css: $data"></span>
+                      </div>
+                    </a>
+                </div>  
+              <!-- /ko -->
+            <!-- /ko -->
+
+        </div>
+      </div>
+
       <footer>
           <div class="bottom-menu-wrapper">
               <ul class="horizontal-menu compact">
@@ -72,5 +111,13 @@
     <script src="js/metro.min.js"></script>
     <script src="js/main.js"></script>
     
+    <script>
+
+        window.onload = function(){
+          TicTacToe.init();
+        };
+
+    </script>
+
   </body>
 </html>
